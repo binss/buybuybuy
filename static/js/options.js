@@ -28,6 +28,18 @@ function loadSettings() {
             case "tmall":
                 $("#block_tmall_checkbox").attr("checked", "checked");
                 break;
+            case "jd":
+                $("#block_jd_checkbox").attr("checked", "checked");
+                break;
+            case "yixun":
+                $("#block_yixun_checkbox").attr("checked", "checked");
+                break;
+            case "amazon":
+                $("#block_amazon_checkbox").attr("checked", "checked");
+                break;
+            case "dangdang":
+                $("#block_dangdang_checkbox").attr("checked", "checked");
+                break;
         }
 
     });
@@ -40,10 +52,18 @@ function saveBlock() {
         block_list.push("taobao");
     if ($("#block_tmall_checkbox").is(':checked'))
         block_list.push("tmall");
-
+    if ($("#block_jd_checkbox").is(':checked'))
+        block_list.push("jd");
+    if ($("#block_yixun_checkbox").is(':checked'))
+        block_list.push("yixun");
+    if ($("#block_amazon_checkbox").is(':checked'))
+        block_list.push("amazon");
+    if ($("#block_dangdang_checkbox").is(':checked'))
+        block_list.push("dangdang");
     Settings.setObject("block_list", block_list);
 
-    extension.changeListener();
+    extension.loadSettings();
+    alert("保存成功！");
 
 }
 
