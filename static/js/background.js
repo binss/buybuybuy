@@ -62,9 +62,11 @@ function loadSettings() {
     filter.urls = [];
     $.each(block_list, function(index, val) {
         filter.urls.push("*://*." + val + ".com/*");
-
     });
-    alert(filter.urls);
+    if (filter.urls.length === 0) {
+        filter.urls.push("");
+    }
+    // alert(filter.urls);
 }
 
 function requestCallback(details) {
@@ -75,15 +77,14 @@ function requestCallback(details) {
 
     // })
     var fullUrl = chrome.extension.getURL("block.html");
-    console.log(fullUrl);
+    console.log(window.location);
     return {
         redirectUrl: fullUrl
     };
 }
 
 
-function changeListener()
-{
+function changeListener() {
     // alert(chrome.webRequest.onBeforeRequest.hasListeners());
     chrome.webRequest.onBeforeRequest.removeListener(requestCallback);
     loadSettings();
