@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started Extension's Popup</title>
+    <script src="static/libs/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <link href="static/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="static/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="static/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/popup.js"></script>
+
+    <style>
+    body {
+        min-width: 200px;
+        overflow-x: hidden;
+    }
+    #menu .item {
+        padding: 4px 25px;
+        -webkit-padding-start: 6px;
+        margin: 0 2px;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+    #menu .item:hover {
+        padding: 3px 24px;
+        -webkit-padding-start: 5px;
+        border: solid 1px #bcd;
+        border-radius: 3px;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.4, hsl(215, 67%, 97%)), color-stop(0.41, hsl(213, 48%, 95%)));
+    }
+    #menu .item:active {
+        padding: 3px 24px;
+        -webkit-padding-start: 5px;
+        border: solid 1px #abc;
+        border-radius: 3px;
+        background: #dde7f2 none;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e8eef4), color-stop(1, #f5f9f4));
+    }
+    .separator {
+        height: 0;
+        margin: 3px 2px;
+        border: 0;
+        border-top: 1px solid #ddd;
+    }
+    .title {
+        background-color: #444;
+        border: 0;
+        color: white;
+        cursor: pointer;
+        margin: 0;
+        padding: 4px;
+        text-align: center;
+    }
+    /*      img {
+        margin:5px;
+        border:2px solid black;
+        vertical-align:middle;
+        width:75px;
+        height:75px;
+      }*/
+    </style>
+
+    <!-- JavaScript and HTML must be in separate files for security. -->
+    <!--     <script src="popup.js"></script>
+ -->
+</head>
+
+<body>
+    <h4 title="单击打开控制面板" class="title"><span id="appname">买买买</span><span id="version">1.0</span></h4>
+    <div>已成功防止手贱：x次</div>
+    <div id="menu">
+        <div id="stopFilter" class="item">
+            <i class="fa fa-pause"></i>
+            <span>stop</span>
+        </div>
+        <div id="separatorProxies" class="separator"></div>
+        <div id="openOptions" class="item">
+            <i class="fa fa-pause"></i>
+            <span>选项</span>
+        </div>
+    </div>
+</body>
+
+</html>

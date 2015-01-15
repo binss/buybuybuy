@@ -1,0 +1,28 @@
+{
+  "name": "买买买",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "第一个由我开发的扩展",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "*://*/*",
+    "webRequestBlocking"
+  ],
+  "background": {
+      "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*","https://*/*"],
+      // "css": ["extension.css"],
+      "js": ["static/libs/jquery-1.11.2.min.js"]
+    }
+  ]
+}
