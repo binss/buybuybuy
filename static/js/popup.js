@@ -2,6 +2,9 @@ var extension;
 
 function init() {
     extension = chrome.extension.getBackgroundPage();
+    if (extension.block_all) {
+        $("#block_all").children().first().addClass("fa-check");
+    }
     // App = extension.App;
     // ProfileManager = extension.ProfileManager;
     // RuleManager = extension.RuleManager;
@@ -25,7 +28,7 @@ function init() {
 //         // winBackgroundPage.alert("fuck");
 //         // if (winBackgroundPage)
 //         // {
-//         // 	console.log(winBackgroundPage);
+//         //   console.log(winBackgroundPage);
 //         //     winBackgroundPage.alert("fuck");
 //         // }
 
@@ -41,12 +44,42 @@ function closePopup() {
     window.close();
 }
 
-$(document).ready(function(){
+function blockAll() {
+    if (extension.block_all) {
+        extension.block_all = false;
+        Settings.setValue("block_all", false);
+        $("#block_all").children().first().removeClass("fa-check");
+    } else {
+        extension.block_all = true;
+        Settings.setValue("block_all", true);
+        $("#block_all").children().first().addClass("fa-check");
+    }
+}
+
+function openWarning() {
+    if (extension.open_warning) {
+        extension.open_warning = false;
+        Settings.setValue("open_warning", false);
+        $("#open_warning").children().first().removeClass("fa-check");
+    } else {
+        extension.open_warning = true;
+        Settings.setValue("open_warning", true);
+        $("#open_warning").children().first().addClass("fa-check");
+    }
+}
+
+function openAbout() {
+    $("#menu").css("display", "none");
+    $("#about").css("display", "inline");
+    // $("body").css("min-width", "250px");
+}
+
+$(document).ready(function() {
     init();
-    $("#openOptions").click(openOptions);
-    // $("#divDomain").click(showTempRule);
-    // $("#menuOptions").click(openOptions);
-    // $("#menuAbout").click(showAbout);
+    $("#open_options").click(openOptions);
+    $("#block_all").click(blockAll);
+    $("#open_warning").click(openWarning);
+    $("#open_about").click(openAbout);
     // $("#openMainWebsite").click(openMainWebsite);
     // $("#openPlusWebsite").click(openPlusWebsite);
     // $("#openSupportWebsite").click(openSupportWebsite);

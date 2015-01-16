@@ -1,5 +1,6 @@
 var extension;
 var block_list;
+var block_words;
 
 function init() {
     extension = chrome.extension.getBackgroundPage();
@@ -20,6 +21,7 @@ function init() {
 
 function loadSettings() {
     block_list = Settings.getObject("block_list", []);
+    block_words = Settings.getObject("block_words", []);
     $.each(block_list, function(index, val) {
         switch (val) {
             case "taobao":
@@ -44,6 +46,10 @@ function loadSettings() {
 
     });
 
+    $.each(block_words, function(index, val) {
+        $("#block_words_content").append('<div class="col-md-2 block_word_item">' + val + '</div>');
+    });
+
 }
 
 function saveBlock() {
@@ -61,9 +67,23 @@ function saveBlock() {
     if ($("#block_dangdang_checkbox").is(':checked'))
         block_list.push("dangdang");
     Settings.setObject("block_list", block_list);
+    Settings.setObject("block_words", block_words);
 
     extension.loadSettings();
     alert("保存成功！");
+
+}
+
+function saveNewWord() {
+    var newWord = $("#new_word_input").val();
+    if (!newWord) {
+        alert("请输入屏蔽关键词");
+    } else if ($.inArray(newWord, block_words) != -1) {
+        alert("已存在该关键词");
+    } else {
+        block_words.push(newWord);
+        $("#new_word_input_group").before('<div class="col-md-2 block_word_item">' + newWord + '</div>');
+    }
 
 }
 
@@ -71,12 +91,6 @@ $(document).ready(function() {
     init();
 
     $("#block_save_button").click(saveBlock);
-    // $("#divDomain").click(showTempRule);
-    // $("#menuOptions").click(openOptions);
-    // $("#menuAbout").click(showAbout);
-    // $("#openMainWebsite").click(openMainWebsite);
-    // $("#openPlusWebsite").click(openPlusWebsite);
-    // $("#openSupportWebsite").click(openSupportWebsite);
-    // $("#btnSave").click(addSwitchRule);
-    // $("#btnCancel").click(closePopup);
+    $("#new_word_button").click(saveNewWord);
+    
 });
