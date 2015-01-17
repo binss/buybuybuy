@@ -66,11 +66,13 @@ function saveBlock() {
         block_list.push("amazon");
     if ($("#block_dangdang_checkbox").is(':checked'))
         block_list.push("dangdang");
+
     Settings.setObject("block_list", block_list);
     Settings.setObject("block_words", block_words);
 
     extension.loadSettings();
     alert("保存成功！");
+    location.reload();
 
 }
 
@@ -83,13 +85,13 @@ function saveNewWord() {
     } else {
         block_words.push(newWord);
         $("#new_word_input_group").before('<div class="col-md-2 block_word_item">' + newWord + '</div>');
+        $("#new_word_input").val("");
     }
 
 }
 
 $(document).ready(function() {
     init();
-
     $("#block_save_button").click(saveBlock);
     $("#new_word_button").click(saveNewWord);
     

@@ -2,7 +2,7 @@
   "name": "买买买",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "第一个由我开发的扩展",
+  "description": "可以根据设置拦截购物网站及特定商品，是防止手贱的好帮手～！",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
@@ -20,11 +20,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*/*","https://*/*"],
-      // "css": ["extension.css"],
-      "js": ["static/libs/jquery-1.11.2.min.js"]
+      "matches": ["http://buy.taobao.com/auction/*", "http://buy.tmall.com/order/*"],
+      // "css": ["static/libs/bootstrap.modals.css"],
+      "js": ["static/libs/jquery-1.11.2.min.js","static/js/content_script.js"]
     }
   ],
-  "web_accessible_resources": [ "block.html" ],
+  "web_accessible_resources": [ "block.html", "warning.html","static/js/content_script.js" ],
   "options_page": "options.html"
 }

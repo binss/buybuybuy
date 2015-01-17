@@ -2,39 +2,16 @@ var extension;
 
 function init() {
     extension = chrome.extension.getBackgroundPage();
+    if (extension.enable_warning) {
+        $("#enable_warning").children().first().addClass("fa-check");
+    }
     if (extension.block_all) {
         $("#block_all").children().first().addClass("fa-check");
     }
-    // App = extension.App;
-    // ProfileManager = extension.ProfileManager;
-    // RuleManager = extension.RuleManager;
-    // Settings = extension.Settings;
-    // Utils = extension.Utils;
-    // I18n = extension.I18n;
-    // autoEnabled = RuleManager.isEnabled();
-    // I18n.process(document);
-    // document.body.style.visibility = "visible";
-
-    // buildMenuItems();
-    // initUI();
+    block_times = Settings.getObject("block_times", 0);
+    $("#block_times").text(block_times);
 }
 
-// $(function() {
-//     $("#stopFilter").click(function() {
-//         $(this).children().first().attr("class", "fa fa-play");
-//         var winBackgroundPage = chrome.extension.getBackgroundPage();
-//         // alert("fuck");
-//         // var winBackgroundPage = chrome.extension.getBackgroundPage();
-//         // winBackgroundPage.alert("fuck");
-//         // if (winBackgroundPage)
-//         // {
-//         //   console.log(winBackgroundPage);
-//         //     winBackgroundPage.alert("fuck");
-//         // }
-
-
-//     });
-// });
 function openOptions() {
     closePopup();
     extension.openOptions();
@@ -56,15 +33,15 @@ function blockAll() {
     }
 }
 
-function openWarning() {
-    if (extension.open_warning) {
-        extension.open_warning = false;
-        Settings.setValue("open_warning", false);
-        $("#open_warning").children().first().removeClass("fa-check");
+function enableWarning() {
+    if (extension.enable_warning) {
+        extension.enable_warning = false;
+        Settings.setValue("enable_warning", false);
+        $("#enable_warning").children().first().removeClass("fa-check");
     } else {
-        extension.open_warning = true;
-        Settings.setValue("open_warning", true);
-        $("#open_warning").children().first().addClass("fa-check");
+        extension.enable_warning = true;
+        Settings.setValue("enable_warning", true);
+        $("#enable_warning").children().first().addClass("fa-check");
     }
 }
 
@@ -78,11 +55,6 @@ $(document).ready(function() {
     init();
     $("#open_options").click(openOptions);
     $("#block_all").click(blockAll);
-    $("#open_warning").click(openWarning);
+    $("#enable_warning").click(enableWarning);
     $("#open_about").click(openAbout);
-    // $("#openMainWebsite").click(openMainWebsite);
-    // $("#openPlusWebsite").click(openPlusWebsite);
-    // $("#openSupportWebsite").click(openSupportWebsite);
-    // $("#btnSave").click(addSwitchRule);
-    // $("#btnCancel").click(closePopup);
 });
